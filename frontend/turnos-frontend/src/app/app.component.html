@@ -1,4 +1,39 @@
 <div class="container">
   <h1>Sistema de Gestión de Turnos</h1>
   <h2>Romario Ramírez - 2890 18 11745</h2>
+  
+  <!-- Formulario para agregar turnos -->
+  <div class="form-section">
+    <h3>Agregar Nuevo Turno</h3>
+    <form (ngSubmit)="agregarTurno()">
+      <input type="text" [(ngModel)]="nuevoTurno.nombre" name="nombre" placeholder="Nombre del cliente" required>
+      <input type="text" [(ngModel)]="nuevoTurno.tramite" name="tramite" placeholder="Tipo de trámite" required>
+      <select [(ngModel)]="nuevoTurno.prioridad" name="prioridad" required>
+        <option value="">Seleccionar prioridad</option>
+        <option value="normal">Normal</option>
+        <option value="urgente">Urgente</option>
+      </select>
+      <button type="submit">Agregar Turno</button>
+    </form>
+  </div>
+
+  <!-- Lista de turnos en cola -->
+  <div class="turnos-section">
+    <h3>Turnos en Cola: {{ turnos.length }}</h3>
+    <div *ngFor="let turno of turnos" class="turno-item">
+      <span><strong>{{ turno.nombre }}</strong> - {{ turno.tramite }}</span>
+      <span [class.urgente]="turno.prioridad === 'urgente'">{{ turno.prioridad }}</span>
+    </div>
+  </div>
+
+  <!-- Botón para atender siguiente turno -->
+  <div class="atender-section">
+    <button (click)="atenderSiguiente()">Atender Siguiente</button>
+    <div *ngIf="turnoActual" class="turno-actual">
+      <h3>Turno Actual:</h3>
+      <p><strong>Nombre:</strong> {{ turnoActual.nombre }}</p>
+      <p><strong>Trámite:</strong> {{ turnoActual.tramite }}</p>
+      <p><strong>Prioridad:</strong> {{ turnoActual.prioridad }}</p>
+    </div>
+  </div>
 </div>
