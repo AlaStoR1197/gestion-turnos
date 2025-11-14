@@ -75,6 +75,11 @@ app.get('/turnos/siguiente', (req, res) => {
     res.json(siguienteTurno);
 });
 
+// GET /turnos - Obtener todos los turnos en cola
+app.get('/turnos', (req, res) => {
+    res.json(turnos);
+});
+
 app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);
 });
